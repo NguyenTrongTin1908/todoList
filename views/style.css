@@ -1,0 +1,62 @@
+.squaredcheck {
+    width: 210px;
+    position: relative;
+    margin: 20px auto;
+    label {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        position: absolute;
+        top: 5px;
+        left: 0;
+        background: lighten(#0096FF, 20%);
+        border-radius: 4px;
+        &:after {
+            content: '';
+            width: 10px;
+            height: 5px;
+            position: absolute;
+            top: 4px;
+            left: 3px;
+            border: 2px solid #fff;
+            border-top: none;
+            border-right: none;
+            background: transparent;
+            opacity: 0;
+            transform: rotate(-45deg);
+        }
+        &:hover::after {
+            opacity: 0.3;
+        }
+    }
+    span {
+        position: absolute;
+        width: 300px;
+        left: 30px;
+    }
+    input[type=checkbox] {
+        visibility: hidden;
+        &:checked+label {
+            background: #0096FF;
+        }
+        &:checked+label:after {
+            opacity: 1;
+        }
+        &.checkbox2+label {
+            background: lighten(#329d7b, 20%);
+        }
+        &.checkbox2 {
+            &:checked+label {
+                background: #329d7b;
+            }
+        }
+        &.checkbox3+label {
+            background: lighten(#CC66FF, 20%);
+        }
+        &.checkbox3 {
+            &:checked+label {
+                background: #CC66FF;
+            }
+        }
+    }
+}
