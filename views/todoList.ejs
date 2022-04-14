@@ -11,6 +11,7 @@
     <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css'>
     <link rel="stylesheet" href="./style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 </head>
 
@@ -75,14 +76,21 @@
                 <!-- Todo Item 1 -->
 
                 <%
-                let id=0;
+                var id=0;
                 todo.forEach(sp=>{ 
-                     id++;  %>
+                     id++;  
+                     let status = ""
+                     sp.done=="1"? status="checked=checked": status=""
+                     
+                     
+                    
+                     
+                     %>
                     <div class="row px-3 align-items-center todo-item rounded">
                         <div class="col-auto m-1 p-0 d-flex align-items-center">
                             <h2 class="m-0 p-0">
                                 <!-- <i class="fa fa-square-o text-primary btn m-0 p-0 d-none" data-toggle="tooltip" data-placement="bottom" title="Mark as complete"></i> -->
-                                <input type="checkbox" id="${todo.id}" />
+                                <input type="checkbox" name="option_1" id="checkbox_1" value="<%=sp._id%>" <%=status%> >
                             </h2>
                         </div>
                         <div class="col px-1 m-1 d-flex align-items-center">
@@ -113,7 +121,8 @@
         </div>
     </div>
     <!-- partial -->
-    <script src='https://code.jquery.com/jquery-3.3.1.slim.min.js'></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js">
+    </script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
     <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js'></script>
     <script src='https://stackpath.bootstrapcdn.com/bootlint/1.1.0/bootlint.min.js'></script>
@@ -121,6 +130,38 @@
     <script src="./script.js"></script>
 
     <script language="javascript">
+        $(document).ready(() => {
+
+            $('input[id^="checkbox_"]').not('#checkbox_all').click(function() {
+
+                alert("Đã update trạng thái công việc");
+
+                var idCb = $(this).val()
+
+                function get(url, callback) {
+                    $.ajax({
+                        url: '/checkDone',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            id: idCb
+                        }),
+                        success: (res) => {
+                            cb(res);
+                        },
+                    });
+                }
+                get('/checkDone', function(data) {
+
+
+                });
+
+
+
+            })
+
+
+        });
     </script>
 
 </body>

@@ -1,14 +1,19 @@
 import express from "express";
 import path from "path";
 import ejs from "ejs";
-import bodyParse from "body-parser";
+import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import cors from "cors";
 import { ObjectId } from "mongodb";
 
 const router = express.Router();
 mongoose.connect("mongodb://localhost:27017/todo_list");
 let app = express();
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+app.use(cors());
 
 app.use(express.json());
 // app.use(express.static("./public"));
@@ -80,5 +85,16 @@ app.post("/add", (req, res) => {
         // res.send("CC");
         res.redirect("/");
     });
+});
+
+app.post("/checkDone", async(req, res) => {
+    let datacall = new ObjectId(req.body.id);
+
+    const result = await todoModel
+        .findByIdAndUpdate(datacall, { done: "1" })
+        .then(() => {
+            // res.send("CC");
+            console.log("id la ", datacall);
+        });
 });
 app.listen(port, console.log(`Listening on port ${port}...`));
