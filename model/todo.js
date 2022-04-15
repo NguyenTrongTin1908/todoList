@@ -13,6 +13,10 @@ const TodoSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
+    date: {
+        type: String,
+        require: true,
+    },
 });
 
 const todoModel = mongoose.model("todo", TodoSchema);
