@@ -80,9 +80,9 @@
                 <!-- Todo Item 1 -->
 
                 <%
-                var id=0;
+                
                 todo.forEach(sp=>{ 
-                     id++;  
+                    
                      let status = ""
                      sp.done=="1"? status="checked=checked": status=""
                      
@@ -94,7 +94,7 @@
                         <div class="col-auto m-1 p-0 d-flex align-items-center">
                             <h2 class="m-0 p-0">
                                 <!-- <i class="fa fa-square-o text-primary btn m-0 p-0 d-none" data-toggle="tooltip" data-placement="bottom" title="Mark as complete"></i> -->
-                                <input type="checkbox" name="option_1" id="checkbox_1" value="<%=sp._id%>" <%=status%> >
+                                <input type="checkbox" name="option_1" id="checkbox_1" value="<%=sp.id%>" <%=status%> >
                             </h2>
                         </div>
                         <div class="col px-1 m-1 d-flex align-items-center">
@@ -106,10 +106,10 @@
                         <div class="col-auto m-1 p-0 todo-actions">
                             <div class="row d-flex align-items-center justify-content-end">
                                 <h5 class="m-0 p-0 px-2">
-                                    <a href="/update/<%=sp._id%>"><i class="fa fa-pencil text-info btn m-0 p-0" data-toggle="tooltip" data-placement="bottom" title="Edit todo"> </i></a>
+                                    <a href="/update/<%=sp.id%>"><i class="fa fa-pencil text-info btn m-0 p-0" data-toggle="tooltip" data-placement="bottom" title="Edit todo"> </i></a>
                                 </h5>
                                 <h5 class="m-0 p-0 px-2">
-                                    <a href="/delete/<%=sp._id%>"><i class="fa fa-trash-o text-danger btn m-0 p-0" data-toggle="tooltip" data-placement="bottom" title="Delete todo"></i></a>
+                                    <a href="/delete/<%=sp.id%>"><i class="fa fa-trash-o text-danger btn m-0 p-0" data-toggle="tooltip" data-placement="bottom" title="Delete todo"></i></a>
                                 </h5>
                             </div>
                             <div class="row todo-created-info">
